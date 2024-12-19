@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ClerkProvider, UserButton } from '@clerk/nextjs';
+import {CodeGenerator} from './CodeGenerate';
 
 
 
@@ -93,6 +94,7 @@ export const Sidebar: React.FC = () => {
       )} */}
       </ul>
 
+      <CodeGenerator />
 
       <ClerkProvider>
         <div className="mt-auto">

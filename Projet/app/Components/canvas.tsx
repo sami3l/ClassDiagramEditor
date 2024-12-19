@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as go from 'gojs';
 
 export const GoDiagramCanvas: React.FC = () => {
+
   const diagramRef = useRef<go.Diagram | null>(null);
   const divRef = useRef<HTMLDivElement>(null);
   const [showForm, setShowForm] = useState(false);
@@ -48,8 +49,8 @@ export const GoDiagramCanvas: React.FC = () => {
   const [selectedLinkType, setSelectedLinkType] = useState('Association');
   const [fromMultiplicity, setFromMultiplicity] = useState('');
   const [toMultiplicity, setToMultiplicity] = useState('');
-  
-  const handleGenerateCode = () => {
+
+ const handleGenerateCode  = () => {
     const nodes = diagramRef.current?.model.nodeDataArray;
 
     if (!nodes) return;
@@ -59,14 +60,14 @@ export const GoDiagramCanvas: React.FC = () => {
       const attributes = node.attributes
         .map((attr: { name: string; type: string }) => `  private ${attr.type} ${attr.name};`)
         .join('\n');
-  
+
       const methods = node.methods
         .map(
           (method: { name: string; returnType: string }) =>
             `  public ${method.returnType} ${method.name}() {\n    // implémentation\n  }`
         )
         .join('\n');
-  
+
       const stereotype = node.stereotype ? `${node.stereotype} ` : '';
       
       // Handle different stereotypes and cases
@@ -496,6 +497,9 @@ export const GoDiagramCanvas: React.FC = () => {
     }
   };
 
+  
+
+
   return (
 <div className="flex h-screen">
 
@@ -661,10 +665,22 @@ export const GoDiagramCanvas: React.FC = () => {
 
   <button 
     onClick={handleGenerateCode} 
-    className="bg-blue-600 text-white p-2 rounded-lg m-4 self-start h-16"
+    className="bg-blue-400 text-white p-2 rounded-lg m-4 self-start h-16"
     >
     Generate Java Code
   </button>
+  {/* <button 
+    onClick={handleGenerateCode} 
+    className="bg-yellow-400 text-white p-2 rounded-lg m-4 self-start h-16"
+    >
+    Generate Java Python
+  </button>
+  <button 
+    onClick={handleGenerateCode} 
+    className="bg-red-300 text-white p-2 rounded-lg m-4 self-start h-16"
+    >
+    Generate Java Php
+  </button> */}
     </div>
 
 </div>
